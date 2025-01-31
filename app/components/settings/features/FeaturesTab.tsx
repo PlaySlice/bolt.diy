@@ -41,13 +41,13 @@ export default function FeaturesTab() {
                 Check for updates against the main branch instead of stable
               </p>
             </div> */}
-            <Switch className="ml-auto" checked={isLatestBranch} onCheckedChange={enableLatestBranch} />
+   {/*          <Switch className="ml-auto" checked={isLatestBranch} onCheckedChange={enableLatestBranch} /> */}
           </div>
           <div className="flex items-center justify-between">
             <div>
               <span className="text-bolt-elements-textPrimary">Auto Select Code Template</span>
               <p className="text-xs text-bolt-elements-textTertiary">
-                Let Bolt select the best starter template for your project.
+                Let Ez1 select the best starter template for your project.
               </p>
             </div>
             <Switch className="ml-auto" checked={autoSelectTemplate} onCheckedChange={setAutoSelectTemplate} />
