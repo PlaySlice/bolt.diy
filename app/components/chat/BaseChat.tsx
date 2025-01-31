@@ -492,7 +492,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                         minHeight: TEXTAREA_MIN_HEIGHT,
                         maxHeight: TEXTAREA_MAX_HEIGHT,
                       }}
-                      placeholder="How can Bolt help you today?"
+                      placeholder="Got an idea? Let's build it."
                       translate="no"
                     />
                     <ClientOnly>

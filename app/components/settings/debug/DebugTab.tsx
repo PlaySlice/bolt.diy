@@ -436,7 +436,7 @@ export default function DebugTab() {
       toast.success('Debug information copied to clipboard!');
     });
   }, [activeProviders, systemInfo, isLatestBranch]);
-
+return null
   return (
     <div className="p-4 space-y-6">
       <div className="flex items-center justify-between">

@@ -18,11 +18,11 @@ import AmazonBedrockProvider from './providers/amazon-bedrock';
 import GithubProvider from './providers/github';
 
 export {
-  AnthropicProvider,
+  /* AnthropicProvider,
   CohereProvider,
-  DeepseekProvider,
+  DeepseekProvider, */
   GoogleProvider,
-  GroqProvider,
+ /*  GroqProvider,
   HuggingFaceProvider,
   HyperbolicProvider,
   MistralProvider,
@@ -35,5 +35,5 @@ export {
   TogetherProvider,
   LMStudioProvider,
   AmazonBedrockProvider,
-  GithubProvider,
+  GithubProvider, */
 };

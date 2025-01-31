@@ -18,7 +18,7 @@ interface SettingsProps {
   onClose: () => void;
 }
 
-type TabType = 'data' | 'providers' | 'features' | 'debug' | 'event-logs' | 'connection';
+type TabType = 'data' | 'providers' | 'features' | 'connection';
 
 export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
   const { debug, eventLogs } = useSettings();
@@ -29,7 +29,7 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
     { id: 'providers', label: 'Providers', icon: 'i-ph:key', component: <ProvidersTab /> },
     { id: 'connection', label: 'Connection', icon: 'i-ph:link', component: <ConnectionsTab /> },
     { id: 'features', label: 'Features', icon: 'i-ph:star', component: <FeaturesTab /> },
-    ...(debug
+ /*    ...(debug
       ? [
           {
             id: 'debug' as TabType,
@@ -38,8 +38,8 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
             component: <DebugTab />,
           },
         ]
-      : []),
-    ...(eventLogs
+      : []), */
+ /*    ...(eventLogs
       ? [
           {
             id: 'event-logs' as TabType,
@@ -48,7 +48,7 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
             component: <EventLogsTab />,
           },
         ]
-      : []),
+      : []), */
   ];
 
   return (
@@ -91,7 +91,7 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
                     {tab.label}
                   </button>
                 ))}
-                <div className="mt-auto flex flex-col gap-2">
+{/*                 <div className="mt-auto flex flex-col gap-2">
                   <a
                     href="https://github.com/stackblitz-labs/bolt.diy"
                     target="_blank"
@@ -110,7 +110,7 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
                     <div className="i-ph:book" />
                     Docs
                   </a>
-                </div>
+                </div> */}
               </div>
 
               <div className="flex-1 flex flex-col p-8 pt-10 bg-bolt-elements-background-depth-2">

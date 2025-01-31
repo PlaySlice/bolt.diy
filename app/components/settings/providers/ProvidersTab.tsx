@@ -66,9 +66,10 @@ export default function ProvidersTab() {
           </div>
           <Switch
             className="ml-auto"
-            checked={provider.settings.enabled}
+           /*  checked={provider.settings.enabled} */
+            checked={true}
             onCheckedChange={(enabled) => {
-              updateProviderSettings(provider.name, { ...provider.settings, enabled });
+              updateProviderSettings(provider.name, { ...provider.settings, enabled:true });
 
               if (enabled) {
                 logStore.logProvider(`Provider ${provider.name} enabled`, { provider: provider.name });
