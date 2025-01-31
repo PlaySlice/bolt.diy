@@ -3,7 +3,6 @@ import React from 'react';
 const EXAMPLE_PROMPTS = [
   { text: 'Create a Chrome extension that tracks time spent on websites using Svelte and Firebase' },
   { text: 'Design an interactive fiction storytelling platform with branching choices using Three.js' },
-  { text: 'Develop an AR (Augmented Reality) furniture placement app prototype using SwiftUI for iOS' },
   { text: 'Build a collaborative pixel art drawing tool with real-time updates via WebSockets' },
   { text: 'Code a voice-controlled recipe app that reads cooking steps aloud using the Web Speech API' },
 ];
