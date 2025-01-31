@@ -35,12 +35,12 @@ export default function FeaturesTab() {
             <Switch className="ml-auto" checked={debug} onCheckedChange={handleToggle} />
           </div>
           <div className="flex items-center justify-between">
-            <div>
+ {/*            <div>
               <span className="text-bolt-elements-textPrimary">Use Main Branch</span>
               <p className="text-xs text-bolt-elements-textTertiary">
                 Check for updates against the main branch instead of stable
               </p>
-            </div>
+            </div> */}
             <Switch className="ml-auto" checked={isLatestBranch} onCheckedChange={enableLatestBranch} />
           </div>
           <div className="flex items-center justify-between">
@@ -74,13 +74,13 @@ export default function FeaturesTab() {
           Disclaimer: Experimental features may be unstable and are subject to change.
         </p>
         <div className="flex flex-col">
-          <div className="flex items-center justify-between mb-2">
+{/*           <div className="flex items-center justify-between mb-2">
             <span className="text-bolt-elements-textPrimary">Experimental Providers</span>
             <Switch className="ml-auto" checked={isLocalModel} onCheckedChange={enableLocalModels} />
-          </div>
-          <p className="text-xs text-bolt-elements-textTertiary mb-4">
+          </div> */}
+ {/*          <p className="text-xs text-bolt-elements-textTertiary mb-4">
             Enable experimental providers such as Ollama, LMStudio, and OpenAILike.
-          </p>
+          </p> */}
         </div>
         <div className="flex items-start justify-between pt-4 mb-2 gap-2">
           <div className="flex-1 max-w-[200px]">
