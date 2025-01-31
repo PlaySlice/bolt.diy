@@ -65,7 +65,7 @@ export function ImportButtons(importChat: ((description: string, messages: Messa
             className="px-4 py-2 rounded-lg border border-bolt-elements-borderColor bg-bolt-elements-prompt-background text-bolt-elements-textPrimary hover:bg-bolt-elements-background-depth-3 transition-all flex items-center gap-2"
           >
             <div className="i-ph:upload-simple" />
-            Import Chat
+            Load a Previous Conversation
           </button>
           <ImportFolderButton
             importChat={importChat}
