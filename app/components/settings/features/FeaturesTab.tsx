@@ -30,10 +30,10 @@ export default function FeaturesTab() {
       <div className="mb-6">
         <h3 className="text-lg font-medium text-bolt-elements-textPrimary mb-4">Optional Features</h3>
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
+   {/*        <div className="flex items-center justify-between">
             <span className="text-bolt-elements-textPrimary">Debug Features</span>
             <Switch className="ml-auto" checked={debug} onCheckedChange={handleToggle} />
-          </div>
+          </div> */}
           <div className="flex items-center justify-between">
  {/*            <div>
               <span className="text-bolt-elements-textPrimary">Use Main Branch</span>
