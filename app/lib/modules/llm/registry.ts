@@ -34,6 +34,6 @@ export {
   XAIProvider,
   TogetherProvider,
   LMStudioProvider,
-  AmazonBedrockProvider,
-  GithubProvider, */
+  AmazonBedrockProvider,*/
+  GithubProvider,
 };
