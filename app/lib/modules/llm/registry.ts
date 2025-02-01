@@ -20,11 +20,11 @@ import GithubProvider from './providers/github';
 export {
   /* AnthropicProvider,
   CohereProvider,
-  DeepseekProvider, */
+  DeepseekProvider,*/ 
   GoogleProvider,
- /*  GroqProvider,
-  HuggingFaceProvider,
-  HyperbolicProvider,
+  /*  GroqProvider, */
+ HuggingFaceProvider,
+  /* HyperbolicProvider,
   MistralProvider,
   OllamaProvider,
   OpenAIProvider,
