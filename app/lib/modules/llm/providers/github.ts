@@ -14,7 +14,7 @@ export default class GithubProvider extends BaseProvider {
 
   // find more in https://github.com/marketplace?type=models
   staticModels: ModelInfo[] = [
-    { name: 'DeepSeek-R1', label: 'Deepseek', provider: 'Github', maxTokenAllowed: 8000 },
+    { name: 'DeepSeek-R1', label: 'DeepSeek-R1', provider: 'Github', maxTokenAllowed: 8000 },
     { name: 'o1', label: 'o1-preview', provider: 'Github', maxTokenAllowed: 100000 },
     { name: 'o1-mini', label: 'o1-mini', provider: 'Github', maxTokenAllowed: 8000 },
     { name: 'gpt-4o-mini', label: 'GPT-4o Mini', provider: 'Github', maxTokenAllowed: 8000 },
