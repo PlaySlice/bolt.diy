@@ -14,6 +14,12 @@ export default class TogetherProvider extends BaseProvider {
 
   staticModels: ModelInfo[] = [
     {
+      name: 'deepseek-ai/DeepSeek-V3',
+      label: 'DeepSeek-V3',
+      provider: 'Together',
+      maxTokenAllowed: 512,
+    },
+    {
       name: 'Qwen/Qwen2.5-Coder-32B-Instruct',
       label: 'Qwen/Qwen2.5-Coder-32B-Instruct',
       provider: 'Together',

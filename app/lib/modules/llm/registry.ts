@@ -31,9 +31,9 @@ export {
   OpenRouterProvider,
   OpenAILikeProvider,
   PerplexityProvider,
-  XAIProvider,
+  XAIProvider,*/
   TogetherProvider,
-  LMStudioProvider,
+ /*  LMStudioProvider,
   AmazonBedrockProvider,
-  GithubProvider,*/
+  GithubProvider, */
 };
