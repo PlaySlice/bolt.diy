@@ -17,7 +17,7 @@ export default class TogetherProvider extends BaseProvider {
       name: 'deepseek-ai/DeepSeek-V3',
       label: 'DeepSeek-V3',
       provider: 'Together',
-      maxTokenAllowed: 512,
+      maxTokenAllowed: 8000,
     },
     {
       name: 'Qwen/Qwen2.5-Coder-32B-Instruct',
