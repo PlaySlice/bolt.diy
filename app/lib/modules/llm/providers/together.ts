@@ -14,8 +14,8 @@ export default class TogetherProvider extends BaseProvider {
 
   staticModels: ModelInfo[] = [
     {
-      name: 'deepseek-ai/DeepSeek-V3',
-      label: 'DeepSeek-V3',
+      name: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B',
+      label: 'DeepSeek-R1',
       provider: 'Together',
       maxTokenAllowed: 8000,
     },
