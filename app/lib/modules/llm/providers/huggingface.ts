@@ -15,7 +15,7 @@ export default class HuggingFaceProvider extends BaseProvider {
   staticModels: ModelInfo[] = [
     {
       name: 'deepseek-ai/DeepSeek-R1',
-      label: 'DeepSeek-R1 (HuggingFace)',
+      label: 'DeepSeek-R1-Zero (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
     },
