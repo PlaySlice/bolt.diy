@@ -22,9 +22,9 @@ export {
   CohereProvider,
   DeepseekProvider,*/ 
   GoogleProvider,
-  /*  GroqProvider,*/
- HuggingFaceProvider,
-  /*  HyperbolicProvider,
+  /*  GroqProvider,
+   HuggingFaceProvider,
+   HyperbolicProvider,
   MistralProvider,
   OllamaProvider,
   OpenAIProvider,
