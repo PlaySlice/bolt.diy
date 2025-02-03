@@ -14,11 +14,10 @@ export function isIOS() {
 export function showMobileMessage() {
   if (typeof document === 'undefined') return;
   if (isIOS()) {
-    document.body.innerHTML = `
-      <div style="height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;">
-        <h1>Please use the desktop version</h1>
-      </div>
-    `;
+    const mobileMessage = document.createElement('div');
+    mobileMessage.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: white; z-index: 9999; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;';
+    mobileMessage.innerHTML = '<h1>Please use the desktop version</h1>';
+    document.body.appendChild(mobileMessage);
   }
 }
 
