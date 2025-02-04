@@ -28,8 +28,8 @@ export default class OpenRouterProvider extends BaseProvider {
 
   staticModels: ModelInfo[] = [
     {
-      name: 'google/gemini-2.0-flash-thinking-exp:free',
-      label: 'Gemini-2.0-flash-thinking (OpenRouter)',
+      name: 'deepseek/deepseek-r1-distill-qwen-32b',
+      label: 'deepseek/deepseek-r1-distill-qwen-32b(OpenRouter)',
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
     },
@@ -73,7 +73,7 @@ export default class OpenRouterProvider extends BaseProvider {
     { name: 'cohere/command', label: 'Cohere Command (OpenRouter)', provider: 'OpenRouter', maxTokenAllowed: 4096 },
   ];
 
-  async getDynamicModels(
+ /*  async getDynamicModels(
     _apiKeys?: Record<string, string>,
     _settings?: IProviderSetting,
     _serverEnv: Record<string, string> = {},
@@ -99,7 +99,7 @@ export default class OpenRouterProvider extends BaseProvider {
       console.error('Error getting OpenRouter models:', error);
       return [];
     }
-  }
+  } */
 
   getModelInstance(options: {
     model: string;
