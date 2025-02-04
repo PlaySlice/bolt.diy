@@ -28,20 +28,20 @@ export default class OpenRouterProvider extends BaseProvider {
 
   staticModels: ModelInfo[] = [
     {
-      name: 'anthropic/claude-3.5-sonnet',
-      label: 'Anthropic: Claude 3.5 Sonnet (OpenRouter)',
+      name: 'google/gemini-2.0-flash-thinking-exp:free',
+      label: 'Gemini-2.0-flash-thinking (OpenRouter)',
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
     },
     {
-      name: 'anthropic/claude-3-haiku',
-      label: 'Anthropic: Claude 3 Haiku (OpenRouter)',
+      name: 'deepseek/deepseek-r1:free',
+      label: 'Deepseek-r1 (OpenRouter)',
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
     },
     {
-      name: 'deepseek/deepseek-coder',
-      label: 'Deepseek-Coder V2 236B (OpenRouter)',
+      name: 'nvidia/llama-3.1-nemotron-70b-instruct:free',
+      label: 'llama-3.1-nemotron-70b-instruct (OpenRouter)',
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
     },
