@@ -70,7 +70,7 @@ export default class OpenRouterProvider extends BaseProvider {
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
     }, */
-    { name: 'cohere/command', label: 'Cohere Command (OpenRouter)', provider: 'OpenRouter', maxTokenAllowed: 4096 },
+/*     { name: 'cohere/command', label: 'Cohere Command (OpenRouter)', provider: 'OpenRouter', maxTokenAllowed: 4096 }, */
   ];
 
  /*  async getDynamicModels(
