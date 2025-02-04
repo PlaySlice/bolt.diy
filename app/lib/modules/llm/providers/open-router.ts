@@ -29,11 +29,11 @@ export default class OpenRouterProvider extends BaseProvider {
   staticModels: ModelInfo[] = [
     {
       name: 'deepseek/deepseek-r1-distill-qwen-32b',
-      label: 'deepseek/deepseek-r1-distill-qwen-32b(OpenRouter)',
+      label: 'deepseek-r1-distill-qwen-32b(OpenRouter)',
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
     },
-    {
+/*     {
       name: 'deepseek/deepseek-r1:free',
       label: 'Deepseek-r1 (OpenRouter)',
       provider: 'OpenRouter',
@@ -69,7 +69,7 @@ export default class OpenRouterProvider extends BaseProvider {
       label: 'OpenRouter Qwen 110b Chat (OpenRouter)',
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
-    },
+    }, */
     { name: 'cohere/command', label: 'Cohere Command (OpenRouter)', provider: 'OpenRouter', maxTokenAllowed: 4096 },
   ];
 
