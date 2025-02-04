@@ -29,7 +29,7 @@ export default class OpenRouterProvider extends BaseProvider {
   staticModels: ModelInfo[] = [
     {
       name: 'deepseek/deepseek-r1-distill-qwen-32b',
-      label: 'deepseek-r1-distill-qwen-32b(OpenRouter)',
+      label: 'Deepseek-R1',
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
     },
