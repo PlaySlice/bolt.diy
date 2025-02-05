@@ -17,7 +17,11 @@ body {
   --gradient-opacity: 0.8;
   --primary-color: rgba(20, 20, 20, var(--gradient-opacity)); /* Deep Charcoal Black */
   --secondary-color: rgba(240, 240, 240, var(--gradient-opacity)); /* Soft Light Gray */
-  --accent-color: rgba(255, 87, 34, var(--gradient-opacity)); /* Vibrant Orange-Red */
+  --accent-color: linear-gradient(90deg, rgba(18, 214, 223, var(--gradient-opacity)), rgba(247, 15, 255, var(--gradient-opacity))); /* Cyan-Teal to Pinkish Purple Gradient */
+  //--primary-color: rgba(20, 20, 20, var(--gradient-opacity)); /* Deep Charcoal Black */
+  //--secondary-color: rgba(240, 240, 240, var(--gradient-opacity)); /* Soft Light Gray */
+  //--accent-color: rgba(255, 87, 34, var(--gradient-opacity)); /* Vibrant Orange-Red */
+  
   // --primary-color: rgba(147, 112, 219, var(--gradient-opacity));
   // --secondary-color: rgba(138, 43, 226, var(--gradient-opacity));
   // --accent-color: rgba(180, 170, 220, var(--gradient-opacity));
