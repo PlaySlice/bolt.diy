@@ -61,8 +61,10 @@ export default function FeaturesTab() {
             </div>
             <Switch
               className="ml-auto"
-              checked={contextOptimizationEnabled}
-              onCheckedChange={enableContextOptimization}
+              checked={true}
+            //onCheckedChange={enableContextOptimization}
+/*               checked={contextOptimizationEnabled}
+              onCheckedChange={enableContextOptimization} */
             />
           </div>
         </div>
