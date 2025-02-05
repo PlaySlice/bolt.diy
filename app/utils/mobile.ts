@@ -1,8 +1,15 @@
 export function isMobile() {
   // Check if we're in a browser environment
   if (typeof window === 'undefined') return false;
-  // we use sm: as the breakpoint for mobile. It's currently set to 640px
-  return window.innerWidth < 1200;
+  
+  // Check if navigator exists
+  if (!window.navigator) return false;
+
+  // Use a combination of screen width and user agent checks
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+  
+  return mobileRegex.test(userAgent) || window.innerWidth < 1200;
 }
 
 export function isIOS() {
