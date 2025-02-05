@@ -2,7 +2,7 @@ export function isMobile() {
   // Check if we're in a browser environment
   if (typeof window === 'undefined') return false;
   // we use sm: as the breakpoint for mobile. It's currently set to 640px
-  return window.innerWidth < 640;
+  return window.innerWidth < 1200;
 }
 
 export function isIOS() {
