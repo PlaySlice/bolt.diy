@@ -37,7 +37,7 @@ export default class OpenRouterProvider extends BaseProvider {
       name: 'deepseek/deepseek-r1:free',
       label: 'Deepseek',
       provider: 'OpenRouter',
-      maxTokenAllowed: 8000,
+      maxTokenAllowed: 4096,
     },
 /*    {
       name: 'nvidia/llama-3.1-nemotron-70b-instruct:free',
