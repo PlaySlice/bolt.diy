@@ -33,13 +33,13 @@ export default class OpenRouterProvider extends BaseProvider {
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
     },
-/*    {
+    {
     name: 'qwen/qwen-2.5-coder-32b-instruct',
       label: 'qwen-2.5-coder',
       provider: 'OpenRouter',
-      maxTokenAllowed: 4000,
+      maxTokenAllowed: 2000,
     },
-   {
+/*   {
       name: 'nvidia/llama-3.1-nemotron-70b-instruct:free',
       label: 'llama-3.1-nemotron-70b-instruct (OpenRouter)',
       provider: 'OpenRouter',
