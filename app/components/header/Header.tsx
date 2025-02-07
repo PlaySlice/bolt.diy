@@ -24,7 +24,7 @@ export function Header() {
           <img src="/logo-dark-styled.png" alt="logo" className="w-[90px] inline-block hidden dark:block" />
         </a>
       </div>
-      {!chat.started && <div className="mr-1.5"><ThemeSwitch /></div>}
+      {!chat.started ? <div className="mr-1.5"><ThemeSwitch /></div> : null}
       {chat.started && ( // Display ChatDescription and HeaderActionButtons only when the chat has started.
         <>
           <span className="flex-1 px-4 truncate text-center text-bolt-elements-textPrimary">
