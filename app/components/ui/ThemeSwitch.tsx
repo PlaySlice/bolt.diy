@@ -16,7 +16,7 @@ export const ThemeSwitch = memo(({ className }: ThemeSwitchProps) => {
   }, []);
 
   return (
- /*    domLoaded && (
+    domLoaded && (
       <IconButton
         className={className}
         icon={theme === 'dark' ? 'i-ph-sun-dim-duotone' : 'i-ph-moon-stars-duotone'}
@@ -24,6 +24,6 @@ export const ThemeSwitch = memo(({ className }: ThemeSwitchProps) => {
         title="Toggle Theme"
         onClick={toggleTheme}
       />
-    ) */
+    )
   );
 });
