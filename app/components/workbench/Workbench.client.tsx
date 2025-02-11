@@ -173,7 +173,7 @@ export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => 
                       onClick={() => {
                         const repoName = prompt(
                           'Please enter a name for your new GitHub repository:',
-                          'bolt-generated-project',
+                          'ez1-generated-project',
                         );
 
                         if (!repoName) {
