@@ -65,9 +65,8 @@ export function Header() {
         }
       )}
     >
-      {/* Left container: Logo and Social Links */}
+      {/* Left container: Logo */}
       <div className="flex items-center gap-4">
-        {/* Logo */}
         <div className="flex items-center gap-2 z-logo text-bolt-elements-textPrimary cursor-pointer">
           <div className="i-ph:sidebar-simple-duotone text-xl" />
           <a
@@ -86,6 +85,10 @@ export function Header() {
             />
           </a>
         </div>
+      </div>
+
+      {/* Right container: Social Links and ThemeSwitch / Chat Description & Action Buttons */}
+      <div className="flex items-center gap-4">
         {/* Social Links */}
         <div className="flex items-center space-x-3">
           <a
@@ -113,10 +116,8 @@ export function Header() {
             <YoutubeIcon className="h-4 w-4" />
           </a>
         </div>
-      </div>
 
-      {/* Right container: ThemeSwitch or Chat Description & Action Buttons */}
-      <div>
+        {/* Conditional content based on chat status */}
         {!chat.started ? (
           <div className="mr-1.5">
             <ThemeSwitch />
