@@ -519,7 +519,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                         <IconButton title="Upload file" className="transition-all" onClick={() => handleFileUpload()}>
                           <div className="i-ph:paperclip text-xl"></div>
                         </IconButton>
-                        <IconButton
+ {/*                        <IconButton
                           title="Enhance prompt"
                           disabled={input.length === 0 || enhancingPrompt}
                           className={classNames('transition-all', enhancingPrompt ? 'opacity-100' : '')}
@@ -533,7 +533,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                           ) : (
                             <div className="i-bolt:stars text-xl"></div>
                           )}
-                        </IconButton>
+                        </IconButton> */}
 
                         <SpeechRecognitionButton
                           isListening={isListening}
