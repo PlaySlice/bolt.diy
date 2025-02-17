@@ -18,8 +18,8 @@ import AmazonBedrockProvider from './providers/amazon-bedrock';
 import GithubProvider from './providers/github';
 
 export {
-  /* AnthropicProvider,
-  CohereProvider,
+ AnthropicProvider,
+ /*   CohereProvider,
   DeepseekProvider,*/ 
   GoogleProvider,
   /*  GroqProvider,
