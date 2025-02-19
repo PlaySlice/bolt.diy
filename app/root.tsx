@@ -80,7 +80,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 import { logStore } from './lib/stores/logs';
 
-export default function Root() {
+export default function App() {
   const theme = useStore(themeStore);
 
   useEffect(() => {
@@ -93,22 +93,8 @@ export default function Root() {
   }, []);
 
   return (
-    <html lang="en">
-      <head>
-        <Head />
-      </head>
-      <body>
-        <Layout>
-          <Outlet />
-        </Layout>
-        <script
-          defer
-          src="https://myai.tools/vendor/chatbot/js/external-chatbot.js"
-          data-chatbot-uuid="e705f22f-09d7-4960-9667-00cee386bd37"
-          data-iframe-width="420"
-          data-iframe-height="745"
-        ></script>
-      </body>
-    </html>
+    <Layout>
+      <Outlet />
+    </Layout>
   );
 }
