@@ -24,9 +24,9 @@ export {
   GoogleProvider,
   /*  GroqProvider,
    HuggingFaceProvider,
-   HyperbolicProvider,
+   HyperbolicProvider,*/
   MistralProvider,
-  OllamaProvider,*/
+  /* OllamaProvider,*/
   OpenAIProvider,
   OpenRouterProvider,
 /*  OpenAILikeProvider,
