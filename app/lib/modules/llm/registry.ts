@@ -23,8 +23,8 @@ export {
   DeepseekProvider,
   GoogleProvider,
   /*  GroqProvider,*/
-   HuggingFaceProvider,
-  /*  HyperbolicProvider,*/
+  /* HuggingFaceProvider,
+    HyperbolicProvider,*/
   MistralProvider,
   /* OllamaProvider,*/
   OpenAIProvider,
