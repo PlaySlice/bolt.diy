@@ -14,12 +14,12 @@ export default class HuggingFaceProvider extends BaseProvider {
 
   staticModels: ModelInfo[] = [
     {
-      name: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
-      label: 'DeepSeek-R1-Distill-Qwen-32B (HuggingFace)',
+      name: 'lumolabs-ai/Lumo-70B-Instruct',
+      label: 'lumolabs-ai/Lumo-70B-Instruct',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
     },  
-    {
+   /*  {
       name: 'Qwen/Qwen2.5-Coder-32B-Instruct',
       label: 'Qwen2.5-Coder-32B-Instruct (HuggingFace)',
       provider: 'HuggingFace',
@@ -31,12 +31,12 @@ export default class HuggingFaceProvider extends BaseProvider {
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
     },
-/*     {
+    {
       name: '01-ai/Yi-1.5-34B-Chat',
       label: 'Yi-1.5-34B-Chat (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
-    }, */
+    }, 
     {
       name: 'codellama/CodeLlama-34b-Instruct-hf',
       label: 'CodeLlama-34b-Instruct (HuggingFace)',
@@ -48,7 +48,7 @@ export default class HuggingFaceProvider extends BaseProvider {
       label: 'Hermes-3-Llama-3.1-8B (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
-    },
+    }, */
   /*   {
       name: 'Qwen/Qwen2.5-Coder-32B-Instruct',
       label: 'Qwen2.5-Coder-32B-Instruct (HuggingFace)',
