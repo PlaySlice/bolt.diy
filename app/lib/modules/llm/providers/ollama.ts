@@ -34,7 +34,7 @@ export default class OllamaProvider extends BaseProvider {
   icon = 'i-ph:cloud-arrow-down';
 
   config = {
-    baseUrlKey: 'OLLAMA_API_BASE_URL',
+    baseUrlKey: 'OLLAMA_ORIGINS',
   };
 
   // Static models available without needing to query the API
@@ -87,7 +87,7 @@ export default class OllamaProvider extends BaseProvider {
       apiKeys,
       providerSettings: settings,
       serverEnv,
-      defaultBaseUrlKey: 'OLLAMA_API_BASE_URL',
+      defaultBaseUrlKey: 'OLLAMA_ORIGINS',
       defaultApiTokenKey: '',
     });
 
@@ -133,7 +133,7 @@ export default class OllamaProvider extends BaseProvider {
       apiKeys,
       providerSettings: providerSettings?.[this.name],
       serverEnv: envRecord,
-      defaultBaseUrlKey: 'OLLAMA_API_BASE_URL',
+      defaultBaseUrlKey: 'OLLAMA_ORIGINS',
       defaultApiTokenKey: '',
     });
 
