@@ -14,20 +14,8 @@ export default class HuggingFaceProvider extends BaseProvider {
 
   staticModels: ModelInfo[] = [
     {
-      name: 'lumolabs-ai/Lumo-70B-Instruct',
-      label: 'lumolabs-ai/Lumo-70B-Instruct',
-      provider: 'HuggingFace',
-      maxTokenAllowed: 8000,
-    },  
-   /*  {
       name: 'Qwen/Qwen2.5-Coder-32B-Instruct',
       label: 'Qwen2.5-Coder-32B-Instruct (HuggingFace)',
-      provider: 'HuggingFace',
-      maxTokenAllowed: 8000,
-    },
-    {
-      name: 'Qwen/Qwen2.5-72B-Instruct',
-      label: 'Qwen2.5-72B-Instruct (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
     },
@@ -36,7 +24,7 @@ export default class HuggingFaceProvider extends BaseProvider {
       label: 'Yi-1.5-34B-Chat (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
-    }, 
+    },
     {
       name: 'codellama/CodeLlama-34b-Instruct-hf',
       label: 'CodeLlama-34b-Instruct (HuggingFace)',
@@ -48,49 +36,49 @@ export default class HuggingFaceProvider extends BaseProvider {
       label: 'Hermes-3-Llama-3.1-8B (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
-    }, */
-  /*   {
+    },
+    {
       name: 'Qwen/Qwen2.5-Coder-32B-Instruct',
       label: 'Qwen2.5-Coder-32B-Instruct (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
-    }, */
-/*     {
+    },
+    {
       name: 'Qwen/Qwen2.5-72B-Instruct',
       label: 'Qwen2.5-72B-Instruct (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
-    }, */
-/*     {
+    },
+    {
       name: 'meta-llama/Llama-3.1-70B-Instruct',
       label: 'Llama-3.1-70B-Instruct (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
-    }, */
-/*     {
+    },
+    {
       name: 'meta-llama/Llama-3.1-405B',
       label: 'Llama-3.1-405B (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
-    }, */
- /*    {
+    },
+    {
       name: '01-ai/Yi-1.5-34B-Chat',
       label: 'Yi-1.5-34B-Chat (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
-    }, */
- /*    {
+    },
+    {
       name: 'codellama/CodeLlama-34b-Instruct-hf',
       label: 'CodeLlama-34b-Instruct (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
-    }, */
-/*     {
+    },
+    {
       name: 'NousResearch/Hermes-3-Llama-3.1-8B',
       label: 'Hermes-3-Llama-3.1-8B (HuggingFace)',
       provider: 'HuggingFace',
       maxTokenAllowed: 8000,
-    }, */
+    },
   ];
 
   getModelInstance(options: {

@@ -3,7 +3,8 @@ import { generateId } from './fileUtils';
 
 export interface ProjectCommands {
   type: string;
-  setupCommand: string;
+  setupCommand?: string;
+  startCommand?: string;
   followupMessage: string;
 }
 
@@ -33,7 +34,8 @@ export async function detectProjectCommands(files: FileContent[]): Promise<Proje
       if (availableCommand) {
         return {
           type: 'Node.js',
-          setupCommand: `npm install && npm run ${availableCommand}`,
+          setupCommand: `npm install`,
+          startCommand: `npm run ${availableCommand}`,
           followupMessage: `Found "${availableCommand}" script in package.json. Running "npm run ${availableCommand}" after installation.`,
         };
       }
@@ -53,7 +55,7 @@ export async function detectProjectCommands(files: FileContent[]): Promise<Proje
   if (hasFile('index.html')) {
     return {
       type: 'Static',
-      setupCommand: 'npx --yes serve',
+      startCommand: 'npx --yes serve',
       followupMessage: '',
     };
   }
@@ -62,19 +64,66 @@ export async function detectProjectCommands(files: FileContent[]): Promise<Proje
 }
 
 export function createCommandsMessage(commands: ProjectCommands): Message | null {
-  if (!commands.setupCommand) {
+  if (!commands.setupCommand && !commands.startCommand) {
     return null;
+  }
+
+  let commandString = '';
+
+  if (commands.setupCommand) {
+    commandString += `
+<ez1Action type="shell">${commands.setupCommand}</ez1Action>`;
+  }
+
+  if (commands.startCommand) {
+    commandString += `
+<ez1Action type="start">${commands.startCommand}</ez1Action>
+`;
   }
 
   return {
     role: 'assistant',
     content: `
-<boltArtifact id="project-setup" title="Project Setup">
-<boltAction type="shell">
-${commands.setupCommand}
-</boltAction>
-</boltArtifact>${commands.followupMessage ? `\n\n${commands.followupMessage}` : ''}`,
+<ez1Artifact id="project-setup" title="Project Setup">
+${commandString}
+</ez1Artifact>${commands.followupMessage ? `\n\n${commands.followupMessage}` : ''}`,
     id: generateId(),
     createdAt: new Date(),
   };
+}
+
+export function escapeBoltArtifactTags(input: string) {
+  // Regular expression to match ez1Artifact tags and their content
+  const regex = /(<ez1Artifact[^>]*>)([\s\S]*?)(<\/ez1Artifact>)/g;
+
+  return input.replace(regex, (match, openTag, content, closeTag) => {
+    // Escape the opening tag
+    const escapedOpenTag = openTag.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    // Escape the closing tag
+    const escapedCloseTag = closeTag.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    // Return the escaped version
+    return `${escapedOpenTag}${content}${escapedCloseTag}`;
+  });
+}
+
+export function escapeBoltAActionTags(input: string) {
+  // Regular expression to match boltArtifact tags and their content
+  const regex = /(<ez1Action[^>]*>)([\s\S]*?)(<\/ez1Action>)/g;
+
+  return input.replace(regex, (match, openTag, content, closeTag) => {
+    // Escape the opening tag
+    const escapedOpenTag = openTag.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    // Escape the closing tag
+    const escapedCloseTag = closeTag.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    // Return the escaped version
+    return `${escapedOpenTag}${content}${escapedCloseTag}`;
+  });
+}
+
+export function escapeBoltTags(input: string) {
+  return escapeBoltArtifactTags(escapeBoltAActionTags(input));
 }

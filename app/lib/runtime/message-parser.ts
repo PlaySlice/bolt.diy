@@ -3,10 +3,10 @@ import type { BoltArtifactData } from '~/types/artifact';
 import { createScopedLogger } from '~/utils/logger';
 import { unreachable } from '~/utils/unreachable';
 
-const ARTIFACT_TAG_OPEN = '<boltArtifact';
-const ARTIFACT_TAG_CLOSE = '</boltArtifact>';
-const ARTIFACT_ACTION_TAG_OPEN = '<boltAction';
-const ARTIFACT_ACTION_TAG_CLOSE = '</boltAction>';
+const ARTIFACT_TAG_OPEN = '<ez1Artifact';
+const ARTIFACT_TAG_CLOSE = '</ez1Artifact>';
+const ARTIFACT_ACTION_TAG_OPEN = '<ez1Action';
+const ARTIFACT_ACTION_TAG_CLOSE = '</ez1Action>';
 
 const logger = createScopedLogger('MessageParser');
 
@@ -64,6 +64,10 @@ function cleanoutMarkdownSyntax(content: string) {
     return content;
   }
 }
+
+function cleanEscapedTags(content: string) {
+  return content.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+}
 export class StreamingMessageParser {
   #messages = new Map<string, MessageState>();
 
@@ -110,6 +114,7 @@ export class StreamingMessageParser {
               // Remove markdown code block syntax if present and file is not markdown
               if (!currentAction.filePath.endsWith('.md')) {
                 content = cleanoutMarkdownSyntax(content);
+                content = cleanEscapedTags(content);
               }
 
               content += '\n';
@@ -141,6 +146,7 @@ export class StreamingMessageParser {
 
               if (!currentAction.filePath.endsWith('.md')) {
                 content = cleanoutMarkdownSyntax(content);
+                content = cleanEscapedTags(content);
               }
 
               this._options.callbacks?.onActionStream?.({
@@ -310,7 +316,7 @@ export class StreamingMessageParser {
 
 const createArtifactElement: ElementFactory = (props) => {
   const elementProps = [
-    'class="__boltArtifact__"',
+    'class="__ez1Artifact__"',
     ...Object.entries(props).map(([key, value]) => {
       return `data-${camelToDashCase(key)}=${JSON.stringify(value)}`;
     }),

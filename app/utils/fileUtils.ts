@@ -103,3 +103,19 @@ export const detectProjectType = async (
 
   return { type: '', setupCommand: '', followupMessage: '' };
 };
+
+export const filesToArtifacts = (files: { [path: string]: { content: string } }, id: string): string => {
+  return `
+<ez1Artifact id="${id}" title="User Updated Files">
+${Object.keys(files)
+  .map(
+    (filePath) => `
+<ez1Action type="file" filePath="${filePath}">
+${files[filePath].content}
+</ez1Action>
+`,
+  )
+  .join('\n')}
+</ez1Artifact>
+  `;
+};

@@ -3,6 +3,8 @@ import React from 'react';
 const EXAMPLE_PROMPTS = [
   { text: 'Design an interactive fiction storytelling platform with branching choices using Three.js' },
   { text: 'Build a collaborative pixel art drawing tool with real-time updates via WebSockets' },
+  { text: 'Make a space invaders game' },
+  { text: 'Make a Tic Tac Toe game in html, css and js only' },
 ];
 
 export function ExamplePrompts(sendMessage?: { (event: React.UIEvent, messageInput?: string): void | undefined }) {

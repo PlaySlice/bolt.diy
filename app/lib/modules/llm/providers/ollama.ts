@@ -34,29 +34,10 @@ export default class OllamaProvider extends BaseProvider {
   icon = 'i-ph:cloud-arrow-down';
 
   config = {
-    baseUrlKey: 'OLLAMA_ORIGINS',
+    baseUrlKey: 'OLLAMA_API_BASE_URL',
   };
 
-  // Static models available without needing to query the API
   staticModels: ModelInfo[] = [];
-
-  constructor() {
-    super();
-    // Initialize staticModels with a default static model.
-    this.staticModels = [
-      {
-        name: 'lumolabs-ai/Lumo-8B-Instruct',
-        label: 'lumolabs-ai/Lumo-8B-Instruct',
-        provider: 'ollama',
-        maxTokenAllowed: 8000,
-      },
-    ];
-  }
-
-  // Optionally, add a helper to return static models
-  getStaticModels(): ModelInfo[] {
-    return this.staticModels;
-  }
 
   private _convertEnvToRecord(env?: Env): Record<string, string> {
     if (!env) {
@@ -87,7 +68,7 @@ export default class OllamaProvider extends BaseProvider {
       apiKeys,
       providerSettings: settings,
       serverEnv,
-      defaultBaseUrlKey: 'OLLAMA_ORIGINS',
+      defaultBaseUrlKey: 'OLLAMA_API_BASE_URL',
       defaultApiTokenKey: '',
     });
 
@@ -100,8 +81,7 @@ export default class OllamaProvider extends BaseProvider {
        * Running in Server
        * Backend: Check if we're running in Docker
        */
-      const isDocker =
-        process?.env?.RUNNING_IN_DOCKER === 'true' || serverEnv?.RUNNING_IN_DOCKER === 'true';
+      const isDocker = process?.env?.RUNNING_IN_DOCKER === 'true' || serverEnv?.RUNNING_IN_DOCKER === 'true';
 
       baseUrl = isDocker ? baseUrl.replace('localhost', 'host.docker.internal') : baseUrl;
       baseUrl = isDocker ? baseUrl.replace('127.0.0.1', 'host.docker.internal') : baseUrl;
@@ -133,7 +113,7 @@ export default class OllamaProvider extends BaseProvider {
       apiKeys,
       providerSettings: providerSettings?.[this.name],
       serverEnv: envRecord,
-      defaultBaseUrlKey: 'OLLAMA_ORIGINS',
+      defaultBaseUrlKey: 'OLLAMA_API_BASE_URL',
       defaultApiTokenKey: '',
     });
 
@@ -142,8 +122,7 @@ export default class OllamaProvider extends BaseProvider {
       throw new Error('No baseUrl found for OLLAMA provider');
     }
 
-    const isDocker =
-      process?.env?.RUNNING_IN_DOCKER === 'true' || envRecord.RUNNING_IN_DOCKER === 'true';
+    const isDocker = process?.env?.RUNNING_IN_DOCKER === 'true' || envRecord.RUNNING_IN_DOCKER === 'true';
     baseUrl = isDocker ? baseUrl.replace('localhost', 'host.docker.internal') : baseUrl;
     baseUrl = isDocker ? baseUrl.replace('127.0.0.1', 'host.docker.internal') : baseUrl;
 

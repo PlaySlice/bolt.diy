@@ -2,7 +2,7 @@
  * @ts-nocheck
  * Preventing TS checks with files presented in the video for a better presentation.
  */
-import type { Message } from 'ai';
+import type { JSONValue, Message } from 'ai';
 import React, { type RefCallback, useEffect, useState } from 'react';
 import { ClientOnly } from 'remix-utils/client-only';
 import { Menu } from '~/components/sidebar/Menu.client';
@@ -32,6 +32,11 @@ import StarterTemplates from './StarterTemplates';
 import type { ActionAlert } from '~/types/actions';
 import ChatAlert from './ChatAlert';
 import type { ModelInfo } from '~/lib/modules/llm/types';
+import ProgressCompilation from './ProgressCompilation';
+import type { ProgressAnnotation } from '~/types/context';
+import type { ActionRunner } from '~/lib/runtime/action-runner';
+import { LOCAL_PROVIDERS } from '~/lib/stores/settings';
+import { setShowSubscriptionTiers } from '~/lib/stores/wallet';
 
 const TEXTAREA_MIN_HEIGHT = 76;
 
@@ -42,6 +47,7 @@ interface BaseChatProps {
   showChat?: boolean;
   chatStarted?: boolean;
   isStreaming?: boolean;
+  onStreamingChange?: (streaming: boolean) => void;
   messages?: Message[];
   description?: string;
   enhancingPrompt?: boolean;
@@ -64,6 +70,8 @@ interface BaseChatProps {
   setImageDataList?: (dataList: string[]) => void;
   actionAlert?: ActionAlert;
   clearAlert?: () => void;
+  data?: JSONValue[] | undefined;
+  actionRunner?: ActionRunner;
 }
 
 export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
@@ -75,6 +83,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       showChat = true,
       chatStarted = false,
       isStreaming = false,
+      onStreamingChange,
       model,
       setModel,
       provider,
@@ -97,6 +106,8 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       messages,
       actionAlert,
       clearAlert,
+      data,
+      actionRunner,
     },
     ref,
   ) => {
@@ -108,10 +119,22 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
     const [recognition, setRecognition] = useState<SpeechRecognition | null>(null);
     const [transcript, setTranscript] = useState('');
     const [isModelLoading, setIsModelLoading] = useState<string | undefined>('all');
-
+    const [progressAnnotations, setProgressAnnotations] = useState<ProgressAnnotation[]>([]);
+    useEffect(() => {
+      if (data) {
+        const progressList = data.filter(
+          (x) => typeof x === 'object' && (x as any).type === 'progress',
+        ) as ProgressAnnotation[];
+        setProgressAnnotations(progressList);
+      }
+    }, [data]);
     useEffect(() => {
       console.log(transcript);
     }, [transcript]);
+
+    useEffect(() => {
+      onStreamingChange?.(isStreaming);
+    }, [isStreaming, onStreamingChange]);
 
     useEffect(() => {
       if (typeof window !== 'undefined' && ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
@@ -307,6 +330,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               className={classNames('pt-6 px-2 sm:px-6', {
                 'h-full flex flex-col': chatStarted,
               })}
+              ref={scrollRef}
             >
               <ClientOnly>
                 {() => {
@@ -337,6 +361,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                     />
                   )}
                 </div>
+                {progressAnnotations && <ProgressCompilation data={progressAnnotations} />}
                 <div
                   className={classNames(
                     'bg-bolt-elements-background-depth-2 p-3 rounded-lg border border-bolt-elements-borderColor relative w-full max-w-chat mx-auto z-prompt',
@@ -389,15 +414,17 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                             apiKeys={apiKeys}
                             modelLoading={isModelLoading}
                           />
-                          {(providerList || []).length > 0 && provider && (
-                            <APIKeyManager
-                              provider={provider}
-                              apiKey={apiKeys[provider.name] || ''}
-                              setApiKey={(key) => {
-                                onApiKeysChange(provider.name, key);
-                              }}
-                            />
-                          )}
+                          {(providerList || []).length > 0 &&
+                            provider &&
+                            (!LOCAL_PROVIDERS.includes(provider.name) || 'OpenAILike') && (
+                              <APIKeyManager
+                                provider={provider}
+                                apiKey={apiKeys[provider.name] || ''}
+                                setApiKey={(key) => {
+                                  onApiKeysChange(provider.name, key);
+                                }}
+                              />
+                            )}
                         </div>
                       )}
                     </ClientOnly>
@@ -519,7 +546,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                         <IconButton title="Upload file" className="transition-all" onClick={() => handleFileUpload()}>
                           <div className="i-ph:paperclip text-xl"></div>
                         </IconButton>
- {/*                        <IconButton
+                        <IconButton
                           title="Enhance prompt"
                           disabled={input.length === 0 || enhancingPrompt}
                           className={classNames('transition-all', enhancingPrompt ? 'opacity-100' : '')}
@@ -533,7 +560,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                           ) : (
                             <div className="i-bolt:stars text-xl"></div>
                           )}
-                        </IconButton> */}
+                        </IconButton>
 
                         <SpeechRecognitionButton
                           isListening={isListening}
@@ -555,6 +582,16 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                         >
                           <div className={`i-ph:caret-${isModelSettingsCollapsed ? 'right' : 'down'} text-lg`} />
                           {isModelSettingsCollapsed ? <span className="text-xs">{model}</span> : <span />}
+                        </IconButton>
+                        <IconButton
+                          title="Back to Tiers"
+                          className="transition-all flex items-center gap-1 bg-bolt-elements-item-backgroundDefault text-bolt-elements-item-contentDefault"
+                          onClick={() => {
+                            setShowSubscriptionTiers(true);
+                          }}
+                        >
+                          <div className="i-ph:arrow-left text-lg" />
+                          <span className="text-xs">Tiers</span>
                         </IconButton>
                       </div>
                       {input.length > 3 ? (
@@ -588,7 +625,15 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               {!chatStarted && <StarterTemplates />}
             </div>
           </div>
-          <ClientOnly>{() => <Workbench chatStarted={chatStarted} isStreaming={isStreaming} />}</ClientOnly>
+          <ClientOnly>
+            {() => (
+              <Workbench
+                actionRunner={actionRunner ?? ({} as ActionRunner)}
+                chatStarted={chatStarted}
+                isStreaming={isStreaming}
+              />
+            )}
+          </ClientOnly>
         </div>
       </div>
     );

@@ -3,10 +3,13 @@ import { streamText } from '~/lib/.server/llm/stream-text';
 import { stripIndents } from '~/utils/stripIndent';
 import type { ProviderInfo } from '~/types/model';
 import { getApiKeysFromCookie, getProviderSettingsFromCookie } from '~/lib/api/cookies';
+import { createScopedLogger } from '~/utils/logger';
 
 export async function action(args: ActionFunctionArgs) {
   return enhancerAction(args);
 }
+
+const logger = createScopedLogger('api.enhancher');
 
 async function enhancerAction({ context, request }: ActionFunctionArgs) {
   const { message, model, provider } = await request.json<{
@@ -77,17 +80,57 @@ async function enhancerAction({ context, request }: ActionFunctionArgs) {
       env: context.cloudflare?.env as any,
       apiKeys,
       providerSettings,
-    });
+      options: {
+        system:
+          'You are a senior software principal architect, you should help the user analyse the user query and enrich it with the necessary context and constraints to make it more specific, actionable, and effective. You should also ensure that the prompt is self-contained and uses professional language. Your response should ONLY contain the enhanced prompt text. Do not include any explanations, metadata, or wrapper tags.',
 
-    return new Response(result.textStream, {
-      status: 200,
-      headers: {
-        'Content-Type': 'text/event-stream',
-        Connection: 'keep-alive',
-        'Cache-Control': 'no-cache',
-        'Text-Encoding': 'chunked',
+        /*
+         * onError: (event) => {
+         *   throw new Response(null, {
+         *     status: 500,
+         *     statusText: 'Internal Server Error',
+         *   });
+         * }
+         */
       },
     });
+
+    // Handle streaming errors in a non-blocking way
+    (async () => {
+      try {
+        for await (const part of result.fullStream) {
+          if (part.type === 'error') {
+            const error: any = part.error;
+            logger.error('Streaming error:', error);
+            break;
+          }
+        }
+      } catch (error) {
+        logger.error('Error processing stream:', error);
+      }
+    })();
+
+    const encoder = new TextEncoder();
+
+    // Return the text stream with proper encoding
+    return new Response(
+      result.textStream.pipeThrough(
+        new TransformStream({
+          transform(chunk, controller) {
+            controller.enqueue(encoder.encode(chunk));
+          },
+        }),
+      ),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'text/event-stream; charset=utf-8',
+          Connection: 'keep-alive',
+          'Cache-Control': 'no-cache',
+          'Text-Encoding': 'chunked',
+        },
+      },
+    );
   } catch (error: unknown) {
     console.log(error);
 

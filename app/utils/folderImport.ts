@@ -1,6 +1,6 @@
 import type { Message } from 'ai';
 import { generateId } from './fileUtils';
-import { detectProjectCommands, createCommandsMessage } from './projectCommands';
+import { detectProjectCommands, createCommandsMessage, escapeBoltTags } from './projectCommands';
 
 export const createChatFromFolder = async (
   files: File[],
@@ -38,15 +38,15 @@ export const createChatFromFolder = async (
     role: 'assistant',
     content: `I've imported the contents of the "${folderName}" folder.${binaryFilesMessage}
 
-<boltArtifact id="imported-files" title="Imported Files">
+<ez1Artifact id="imported-files" title="Imported Files" type="bundled" >
 ${fileArtifacts
   .map(
-    (file) => `<boltAction type="file" filePath="${file.path}">
-${file.content}
-</boltAction>`,
+    (file) => `<ez1Action type="file" filePath="${file.path}">
+${escapeBoltTags(file.content)}
+</ez1Action>`,
   )
   .join('\n\n')}
-</boltArtifact>`,
+</ez1Artifact>`,
     id: generateId(),
     createdAt: new Date(),
   };
@@ -61,6 +61,11 @@ ${file.content}
   const messages = [userMessage, filesMessage];
 
   if (commandsMessage) {
+    messages.push({
+      role: 'user',
+      id: generateId(),
+      content: 'Setup the codebase and Start the application',
+    });
     messages.push(commandsMessage);
   }
 

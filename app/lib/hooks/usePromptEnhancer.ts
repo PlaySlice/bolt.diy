@@ -53,22 +53,25 @@ export function usePromptEnhancer() {
 
         while (true) {
           const { value, done } = await reader.read();
-
+          console.log('Value: ', value);
           if (done) {
             break;
           }
 
           _input += decoder.decode(value);
+          console.log('Value: ', _input);
 
           logger.trace('Set input', _input);
 
           setInput(_input);
         }
       } catch (error) {
+        console.log('Error: ', error);
         _error = error;
         setInput(originalInput);
       } finally {
         if (_error) {
+          console.log('Error2: ', _error);
           logger.error(_error);
         }
 

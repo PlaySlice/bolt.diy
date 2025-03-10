@@ -29,23 +29,23 @@ export default class OpenRouterProvider extends BaseProvider {
   staticModels: ModelInfo[] = [
     {
       name: 'deepseek/deepseek-r1-distill-qwen-32b',
-      label: 'Deepseek-R1',
+      label: 'deepseek-r1',
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
     },
-/*    {
-    name: 'qwen/qwen-2.5-coder-32b-instruct',
-      label: 'qwen-2.5-coder',
-      provider: 'OpenRouter',
-      maxTokenAllowed: 2000,
-    },
-   {
-      name: 'nvidia/llama-3.1-nemotron-70b-instruct:free',
-      label: 'llama-3.1-nemotron-70b-instruct (OpenRouter)',
+/*     {
+      name: 'qwen/qwq-32b:free',
+      label: 'Qwen',
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
-    },
-    {
+    }, */
+/*     {
+      name: 'qwen/qwen-2.5-coder-32b-instruct:free',
+      label: 'Qwen Coder 2.5',
+      provider: 'OpenRouter',
+      maxTokenAllowed: 8000,
+    }, */
+    /* {
       name: 'google/gemini-flash-1.5',
       label: 'Google Gemini Flash 1.5 (OpenRouter)',
       provider: 'OpenRouter',
@@ -69,11 +69,11 @@ export default class OpenRouterProvider extends BaseProvider {
       label: 'OpenRouter Qwen 110b Chat (OpenRouter)',
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
-    }, */
-/*     { name: 'cohere/command', label: 'Cohere Command (OpenRouter)', provider: 'OpenRouter', maxTokenAllowed: 4096 }, */
+    },
+    { name: 'cohere/command', label: 'Cohere Command (OpenRouter)', provider: 'OpenRouter', maxTokenAllowed: 4096 }, */
   ];
 
- /*  async getDynamicModels(
+  async getDynamicModels(
     _apiKeys?: Record<string, string>,
     _settings?: IProviderSetting,
     _serverEnv: Record<string, string> = {},
@@ -86,7 +86,7 @@ export default class OpenRouterProvider extends BaseProvider {
       });
 
       const data = (await response.json()) as OpenRouterModelsResponse;
-
+      return []
       return data.data
         .sort((a, b) => a.name.localeCompare(b.name))
         .map((m) => ({
@@ -99,7 +99,7 @@ export default class OpenRouterProvider extends BaseProvider {
       console.error('Error getting OpenRouter models:', error);
       return [];
     }
-  } */
+  }
 
   getModelInstance(options: {
     model: string;
