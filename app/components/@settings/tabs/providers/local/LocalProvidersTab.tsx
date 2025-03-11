@@ -136,7 +136,7 @@ export default function LocalProvidersTab() {
 
   // Add effect to update category toggle state based on provider states
   useEffect(() => {
-    const newCategoryState = filteredProviders.every((p) => p.settings.enabled);
+    const newCategoryState = filteredProviders.every((p) => p.settings.enabled:true);
     setCategoryEnabled(newCategoryState);
   }, [filteredProviders]);
 
