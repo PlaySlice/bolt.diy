@@ -4,7 +4,7 @@ import type { KeyboardEvent } from 'react';
 import type { ModelInfo } from '~/lib/modules/llm/types';
 import { classNames } from '~/utils/classNames';
 import { useStore } from '@nanostores/react';
-import { walletStore } from '~/lib/stores/wallet';
+import { walletStore, setShowSubscriptionTiers } from '~/lib/stores/wallet';
 
 interface ModelSelectorProps {
   model?: string;
@@ -318,7 +318,15 @@ export const ModelSelector = ({
                     {!isEnabled && (
                       <div className="tier-lock-indicator flex items-center">
                         <span className="lock-icon text-purple-500 mr-1 i-ph:lock-key-fill" />
-                        <span className="upgrade-text text-xs text-purple-400">Upgrade</span>
+                        <span
+                          className="upgrade-text text-xs text-purple-400 cursor-pointer hover:text-purple-300"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setShowSubscriptionTiers(true);
+                          }}
+                        >
+                          Upgrade
+                        </span>
                       </div>
                     )}
                   </div>
