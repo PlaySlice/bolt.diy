@@ -29,6 +29,7 @@ export async function loader({
 
   try {
     const publicKey = new PublicKey(walletAddress);
+
     // Use mainnet endpoint from environment or default
     const endpoint =
       context.cloudflare?.env.SOLANA_ENDPOINT ||
@@ -50,6 +51,7 @@ export async function loader({
 
     const accountInfo = await connection.getParsedAccountInfo(tokenAccounts.value[0].pubkey);
     const data = accountInfo.value?.data as any;
+
     if (data && data.program === 'spl-token' && data.parsed.type === 'account') {
       const tokenAmount = data.parsed.info.tokenAmount;
       balance = parseFloat(tokenAmount.amount) / Math.pow(10, tokenAmount.decimals);

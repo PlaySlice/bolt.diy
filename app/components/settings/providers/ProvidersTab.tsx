@@ -11,7 +11,8 @@ import { providerBaseUrlEnvKeys } from '~/utils/constants';
 const DefaultIcon = '/icons/Default.svg'; // Adjust the path as necessary
 
 export default function ProvidersTab() {
-  const { providers, updateProviderSettings, isLocalModel } = useSettings();
+  // const { providers, updateProviderSettings, isLocalModel } = useSettings();
+  const { providers, updateProviderSettings } = useSettings();
   const [filteredProviders, setFilteredProviders] = useState<IProviderConfig[]>([]);
 
   // Load base URLs from cookies
@@ -29,9 +30,12 @@ export default function ProvidersTab() {
       );
     }
 
-    if (!isLocalModel) {
-      newFilteredProviders = newFilteredProviders.filter((provider) => !LOCAL_PROVIDERS.includes(provider.name));
-    }
+    /*
+     * if (!isLocalModel) {
+     *   newFilteredProviders = newFilteredProviders.filter((provider) => !LOCAL_PROVIDERS.includes(provider.name));
+     * }
+     */
+    newFilteredProviders = newFilteredProviders.filter((provider) => !LOCAL_PROVIDERS.includes(provider.name));
 
     newFilteredProviders.sort((a, b) => a.name.localeCompare(b.name));
 
@@ -40,7 +44,9 @@ export default function ProvidersTab() {
     const urlConfigurable = newFilteredProviders.filter((p) => URL_CONFIGURABLE_PROVIDERS.includes(p.name));
 
     setFilteredProviders([...regular, ...urlConfigurable]);
-  }, [providers, searchTerm, isLocalModel]);
+
+    // }, [providers, searchTerm, isLocalModel]);
+  }, [providers, searchTerm]);
 
   const renderProviderCard = (provider: IProviderConfig) => {
     const envBaseUrlKey = providerBaseUrlEnvKeys[provider.name].baseUrlKey;
@@ -66,10 +72,10 @@ export default function ProvidersTab() {
           </div>
           <Switch
             className="ml-auto"
-           /*  checked={provider.settings.enabled} */
+            /*  checked={provider.settings.enabled} */
             checked={true}
             onCheckedChange={(enabled) => {
-              updateProviderSettings(provider.name, { ...provider.settings, enabled:true });
+              updateProviderSettings(provider.name, { ...provider.settings, enabled: true });
 
               if (enabled) {
                 logStore.logProvider(`Provider ${provider.name} enabled`, { provider: provider.name });

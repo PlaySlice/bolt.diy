@@ -8,6 +8,7 @@ import { TabManagement } from '~/components/@settings/shared/components/TabManag
 import { TabTile } from '~/components/@settings/shared/components/TabTile';
 import { useUpdateCheck } from '~/lib/hooks/useUpdateCheck';
 import { useFeatures } from '~/lib/hooks/useFeatures';
+
 // Removed: import { useNotifications } from '~/lib/hooks/useNotifications';
 import { useConnectionStatus } from '~/lib/hooks/useConnectionStatus';
 import { useDebugStatus } from '~/lib/hooks/useDebugStatus';
@@ -27,15 +28,20 @@ import BackgroundRays from '~/components/ui/BackgroundRays';
 // Import remaining tab components
 import ProfileTab from '~/components/@settings/tabs/profile/ProfileTab';
 import SettingsTab from '~/components/@settings/tabs/settings/SettingsTab';
+
 // Removed: import NotificationsTab from '~/components/@settings/tabs/notifications/NotificationsTab';
 import FeaturesTab from '~/components/@settings/tabs/features/FeaturesTab';
 import DataTab from '~/components/@settings/tabs/data/DataTab';
 import DebugTab from '~/components/@settings/tabs/debug/DebugTab';
+
 // Removed: import { EventLogsTab } from '~/components/@settings/tabs/event-logs/EventLogsTab';
 import UpdateTab from '~/components/@settings/tabs/update/UpdateTab';
 import ConnectionsTab from '~/components/@settings/tabs/connections/ConnectionsTab';
-// Removed: import CloudProvidersTab from '~/components/@settings/tabs/providers/cloud/CloudProvidersTab';
-// Removed: import LocalProvidersTab from '~/components/@settings/tabs/providers/local/LocalProvidersTab';
+
+/*
+ * Removed: import CloudProvidersTab from '~/components/@settings/tabs/providers/cloud/CloudProvidersTab';
+ * Removed: import LocalProvidersTab from '~/components/@settings/tabs/providers/local/LocalProvidersTab';
+ */
 import TaskManagerTab from '~/components/@settings/tabs/task-manager/TaskManagerTab';
 
 interface ControlPanelProps {
@@ -76,6 +82,10 @@ const TAB_DESCRIPTIONS: Record<TabType, string> = {
   'task-manager': 'Monitor system resources and processes',
   'tab-management': 'Configure visible tabs and their order',
   'service-status': 'Monitor cloud LLM service status',
+  notifications: '',
+  'cloud-providers': '',
+  'local-providers': '',
+  'event-logs': '',
 };
 
 // Beta status for experimental features (removed unwanted tabs)
@@ -161,6 +171,7 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
   // Status hooks
   const { hasUpdate, currentVersion, acknowledgeUpdate } = useUpdateCheck();
   const { hasNewFeatures, unviewedFeatures, acknowledgeAllFeatures } = useFeatures();
+
   // Removed notifications hook
   const { hasConnectionIssues, currentIssue, acknowledgeIssue } = useConnectionStatus();
   const { hasActiveWarnings, activeIssues, acknowledgeAllIssues } = useDebugStatus();
@@ -171,18 +182,14 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
   }, []);
 
   // Define removed tab IDs for filtering
-  const removedTabIds = new Set<TabType>([
-    'notifications',
-    'cloud-providers',
-    'local-providers',
-    'event-logs',
-  ]);
+  const removedTabIds = new Set<TabType>(['notifications', 'cloud-providers', 'local-providers', 'event-logs']);
 
   // Add visibleTabs logic using useMemo with optimized calculations
   const visibleTabs = useMemo(() => {
     if (!tabConfiguration?.userTabs || !Array.isArray(tabConfiguration.userTabs)) {
       console.warn('Invalid tab configuration, resetting to defaults');
       resetTabConfiguration();
+
       return [];
     }
 
@@ -193,7 +200,10 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
 
       // Process tabs in order of priority: developer, user, default
       const processTab = (tab: BaseTabConfig) => {
-        if (removedTabIds.has(tab.id)) return;
+        if (removedTabIds.has(tab.id)) {
+          return;
+        }
+
         if (!seenTabs.has(tab.id)) {
           seenTabs.add(tab.id);
           devTabs.push({
@@ -224,8 +234,14 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
     // Optimize user mode tab filtering, filtering out removed tabs
     return tabConfiguration.userTabs
       .filter((tab) => {
-        if (!tab?.id) return false;
-        if (removedTabIds.has(tab.id)) return false;
+        if (!tab?.id) {
+          return false;
+        }
+
+        if (removedTabIds.has(tab.id)) {
+          return false;
+        }
+
         return tab.visible && tab.window === 'user';
       })
       .sort((a, b) => a.order - b.order);
@@ -307,17 +323,22 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
         return <ProfileTab />;
       case 'settings':
         return <SettingsTab />;
+
       // Removed notifications case
       case 'features':
         return <FeaturesTab />;
       case 'data':
         return <DataTab />;
-      // Removed cloud-providers case
-      // Removed local-providers case
+
+      /*
+       * Removed cloud-providers case
+       * Removed local-providers case
+       */
       case 'connection':
         return <ConnectionsTab />;
       case 'debug':
         return <DebugTab />;
+
       // Removed event-logs case
       case 'update':
         return <UpdateTab />;
@@ -336,6 +357,7 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
         return hasUpdate;
       case 'features':
         return hasNewFeatures;
+
       // Removed notifications case
       case 'connection':
         return hasConnectionIssues;
@@ -352,6 +374,7 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
         return `New update available (v${currentVersion})`;
       case 'features':
         return `${unviewedFeatures.length} new feature${unviewedFeatures.length === 1 ? '' : 's'} to explore`;
+
       // Removed notifications case
       case 'connection':
         return currentIssue === 'disconnected'
@@ -362,6 +385,7 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
       case 'debug': {
         const warnings = activeIssues.filter((i) => i.type === 'warning').length;
         const errors = activeIssues.filter((i) => i.type === 'error').length;
+
         return `${warnings} warning${warnings === 1 ? '' : 's'}, ${errors} error${errors === 1 ? '' : 's'}`;
       }
       default:
@@ -382,6 +406,7 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
       case 'features':
         acknowledgeAllFeatures();
         break;
+
       // Removed notifications case
       case 'connection':
         acknowledgeIssue();

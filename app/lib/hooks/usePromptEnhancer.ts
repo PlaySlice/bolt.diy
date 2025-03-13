@@ -54,6 +54,7 @@ export function usePromptEnhancer() {
         while (true) {
           const { value, done } = await reader.read();
           console.log('Value: ', value);
+
           if (done) {
             break;
           }

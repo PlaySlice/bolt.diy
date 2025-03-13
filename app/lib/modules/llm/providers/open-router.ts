@@ -33,44 +33,51 @@ export default class OpenRouterProvider extends BaseProvider {
       provider: 'OpenRouter',
       maxTokenAllowed: 8000,
     },
-/*     {
-      name: 'qwen/qwq-32b:free',
-      label: 'Qwen',
-      provider: 'OpenRouter',
-      maxTokenAllowed: 8000,
-    }, */
-/*     {
-      name: 'qwen/qwen-2.5-coder-32b-instruct:free',
-      label: 'Qwen Coder 2.5',
-      provider: 'OpenRouter',
-      maxTokenAllowed: 8000,
-    }, */
-    /* {
-      name: 'google/gemini-flash-1.5',
-      label: 'Google Gemini Flash 1.5 (OpenRouter)',
-      provider: 'OpenRouter',
-      maxTokenAllowed: 8000,
-    },
-    {
-      name: 'google/gemini-pro-1.5',
-      label: 'Google Gemini Pro 1.5 (OpenRouter)',
-      provider: 'OpenRouter',
-      maxTokenAllowed: 8000,
-    },
-    { name: 'x-ai/grok-beta', label: 'xAI Grok Beta (OpenRouter)', provider: 'OpenRouter', maxTokenAllowed: 8000 },
-    {
-      name: 'mistralai/mistral-nemo',
-      label: 'OpenRouter Mistral Nemo (OpenRouter)',
-      provider: 'OpenRouter',
-      maxTokenAllowed: 8000,
-    },
-    {
-      name: 'qwen/qwen-110b-chat',
-      label: 'OpenRouter Qwen 110b Chat (OpenRouter)',
-      provider: 'OpenRouter',
-      maxTokenAllowed: 8000,
-    },
-    { name: 'cohere/command', label: 'Cohere Command (OpenRouter)', provider: 'OpenRouter', maxTokenAllowed: 4096 }, */
+
+    /*
+     *     {
+     *     name: 'qwen/qwq-32b:free',
+     *     label: 'Qwen',
+     *     provider: 'OpenRouter',
+     *     maxTokenAllowed: 8000,
+     *     },
+     */
+    /*
+     *     {
+     *     name: 'qwen/qwen-2.5-coder-32b-instruct:free',
+     *     label: 'Qwen Coder 2.5',
+     *     provider: 'OpenRouter',
+     *     maxTokenAllowed: 8000,
+     *     },
+     */
+    /*
+     * {
+     * name: 'google/gemini-flash-1.5',
+     * label: 'Google Gemini Flash 1.5 (OpenRouter)',
+     * provider: 'OpenRouter',
+     * maxTokenAllowed: 8000,
+     * },
+     * {
+     * name: 'google/gemini-pro-1.5',
+     * label: 'Google Gemini Pro 1.5 (OpenRouter)',
+     * provider: 'OpenRouter',
+     * maxTokenAllowed: 8000,
+     * },
+     * { name: 'x-ai/grok-beta', label: 'xAI Grok Beta (OpenRouter)', provider: 'OpenRouter', maxTokenAllowed: 8000 },
+     * {
+     * name: 'mistralai/mistral-nemo',
+     * label: 'OpenRouter Mistral Nemo (OpenRouter)',
+     * provider: 'OpenRouter',
+     * maxTokenAllowed: 8000,
+     * },
+     * {
+     * name: 'qwen/qwen-110b-chat',
+     * label: 'OpenRouter Qwen 110b Chat (OpenRouter)',
+     * provider: 'OpenRouter',
+     * maxTokenAllowed: 8000,
+     * },
+     * { name: 'cohere/command', label: 'Cohere Command (OpenRouter)', provider: 'OpenRouter', maxTokenAllowed: 4096 },
+     */
   ];
 
   async getDynamicModels(
@@ -86,7 +93,9 @@ export default class OpenRouterProvider extends BaseProvider {
       });
 
       const data = (await response.json()) as OpenRouterModelsResponse;
-      return []
+
+      return [];
+
       return data.data
         .sort((a, b) => a.name.localeCompare(b.name))
         .map((m) => ({

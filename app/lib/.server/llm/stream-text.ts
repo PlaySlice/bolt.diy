@@ -42,6 +42,7 @@ export async function streamText(props: {
     summary,
   } = props;
   console.log('Props: ', props);
+
   let currentModel = DEFAULT_MODEL;
   let currentProvider = DEFAULT_PROVIDER.name;
   let processedMessages = messages.map((message) => {

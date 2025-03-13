@@ -44,6 +44,7 @@ export default class OllamaProvider extends BaseProvider {
     if (!env) {
       return {};
     }
+
     return Object.entries(env).reduce(
       (acc, [key, value]) => {
         acc[key] = String(value);
@@ -63,7 +64,8 @@ export default class OllamaProvider extends BaseProvider {
     settings?: IProviderSetting,
     serverEnv: Record<string, string> = {},
   ): Promise<ModelInfo[]> {
-    let { baseUrl, apiToken } = this.getProviderBaseUrlAndKey({
+    // let { baseUrl, apiToken } = this.getProviderBaseUrlAndKey({
+    let { baseUrl } = this.getProviderBaseUrlAndKey({
       apiKeys,
       providerSettings: settings,
       serverEnv,
@@ -79,7 +81,9 @@ export default class OllamaProvider extends BaseProvider {
     baseUrl = isDocker ? baseUrl.replace('localhost', 'host.docker.internal') : baseUrl;
     baseUrl = isDocker ? baseUrl.replace('127.0.0.1', 'host.docker.internal') : baseUrl;
 
-    const apiUrl = apiToken ? `${baseUrl}/api/tags?token=${apiToken}` : `${baseUrl}/api/tags`;
+    const apiUrl = `${baseUrl}/api/tags`;
+
+    // const apiUrl = apiToken ? `${baseUrl}/api/tags?token=${apiToken}` : `${baseUrl}/api/tags`;
     const response = await fetch(apiUrl);
     const data = (await response.json()) as OllamaApiResponse;
 
@@ -100,7 +104,8 @@ export default class OllamaProvider extends BaseProvider {
     const { apiKeys, providerSettings, serverEnv, model } = options;
     const envRecord = this._convertEnvToRecord(serverEnv);
 
-    let { baseUrl, apiToken } = this.getProviderBaseUrlAndKey({
+    // let { baseUrl, apiToken } = this.getProviderBaseUrlAndKey({
+    let { baseUrl } = this.getProviderBaseUrlAndKey({
       apiKeys,
       providerSettings: providerSettings?.[this.name],
       serverEnv: envRecord,
@@ -116,7 +121,8 @@ export default class OllamaProvider extends BaseProvider {
     baseUrl = isDocker ? baseUrl.replace('localhost', 'host.docker.internal') : baseUrl;
     baseUrl = isDocker ? baseUrl.replace('127.0.0.1', 'host.docker.internal') : baseUrl;
 
-    const apiBaseUrl = apiToken ? `${baseUrl}/api?token=${apiToken}` : `${baseUrl}/api`;
+    // const apiBaseUrl = apiToken ? `${baseUrl}/api?token=${apiToken}` : `${baseUrl}/api`;
+    const apiBaseUrl = `${baseUrl}/api`;
     logger.debug('Ollama Base Url used: ', apiBaseUrl);
 
     const ollamaInstance = ollama(model, {
@@ -124,6 +130,7 @@ export default class OllamaProvider extends BaseProvider {
     }) as LanguageModelV1 & { config: any };
 
     ollamaInstance.config.baseURL = apiBaseUrl;
+
     return ollamaInstance;
   };
 }

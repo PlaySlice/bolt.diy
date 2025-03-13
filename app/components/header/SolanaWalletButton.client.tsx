@@ -11,11 +11,14 @@ export const SolanaWalletButton: FC = () => {
 
   const fetchBalance = async () => {
     console.log('fetching balance');
+
     if (publicKey) {
       const response = (await fetch(`/api/fetch-balance?wallet=${publicKey.toBase58()}`)) as Record<string, any>;
+
       if (response.ok && !response.error) {
         const data = await response.json();
         console.log('response', data);
+
         const { balance } = data as { balance: number };
         updateWalletBalance(balance);
       } else {

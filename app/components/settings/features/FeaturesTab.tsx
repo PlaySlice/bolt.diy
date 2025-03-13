@@ -5,43 +5,50 @@ import { useSettings } from '~/lib/hooks/useSettings';
 
 export default function FeaturesTab() {
   const {
-    debug,
-    enableDebugMode,
-    isLocalModel,
-    enableLocalModels,
-    enableEventLogs,
-    isLatestBranch,
+    /*
+     * debug,
+     * enableDebugMode,
+     * isLocalModel,
+     * enableLocalModels,
+     * enableEventLogs,
+     * isLatestBranch,
+     */
     enableLatestBranch,
     promptId,
     setPromptId,
     autoSelectTemplate,
     setAutoSelectTemplate,
-    enableContextOptimization,
-    contextOptimizationEnabled,
+
+    /*
+     * enableContextOptimization,
+     * contextOptimizationEnabled,
+     */
   } = useSettings();
 
-  const handleToggle = (enabled: boolean) => {
-    enableDebugMode(enabled);
-    enableEventLogs(enabled);
-  };
+  /*
+   * const handleToggle = (enabled: boolean) => {
+   *   enableDebugMode(enabled);
+   *   enableEventLogs(enabled);
+   * };
+   */
 
   return (
     <div className="p-4 bg-bolt-elements-bg-depth-2 border border-bolt-elements-borderColor rounded-lg mb-4">
       <div className="mb-6">
         <h3 className="text-lg font-medium text-bolt-elements-textPrimary mb-4">Optional Features</h3>
         <div className="space-y-4">
-   {/*        <div className="flex items-center justify-between">
+          {/*        <div className="flex items-center justify-between">
             <span className="text-bolt-elements-textPrimary">Debug Features</span>
             <Switch className="ml-auto" checked={debug} onCheckedChange={handleToggle} />
           </div> */}
           <div className="flex items-center justify-between">
- {/*            <div>
+            {/*            <div>
               <span className="text-bolt-elements-textPrimary">Use Main Branch</span>
               <p className="text-xs text-bolt-elements-textTertiary">
                 Check for updates against the main branch instead of stable
               </p>
             </div> */}
-   {/*          <Switch className="ml-auto" checked={isLatestBranch} onCheckedChange={enableLatestBranch} /> */}
+            {/*          <Switch className="ml-auto" checked={isLatestBranch} onCheckedChange={enableLatestBranch} /> */}
           </div>
           <div className="flex items-center justify-between">
             <div>
@@ -62,9 +69,12 @@ export default function FeaturesTab() {
             <Switch
               className="ml-auto"
               checked={true}
-            //onCheckedChange={enableContextOptimization}
-/*               checked={contextOptimizationEnabled}
-              onCheckedChange={enableContextOptimization} */
+
+              //onCheckedChange={enableContextOptimization}
+              /*
+               *               checked={contextOptimizationEnabled}
+               *               onCheckedChange={enableContextOptimization}
+               */
             />
           </div>
         </div>
@@ -76,11 +86,11 @@ export default function FeaturesTab() {
           Disclaimer: Experimental features may be unstable and are subject to change.
         </p>
         <div className="flex flex-col">
-{/*           <div className="flex items-center justify-between mb-2">
+          {/*           <div className="flex items-center justify-between mb-2">
             <span className="text-bolt-elements-textPrimary">Experimental Providers</span>
             <Switch className="ml-auto" checked={isLocalModel} onCheckedChange={enableLocalModels} />
           </div> */}
- {/*          <p className="text-xs text-bolt-elements-textTertiary mb-4">
+          {/*          <p className="text-xs text-bolt-elements-textTertiary mb-4">
             Enable experimental providers such as Ollama, LMStudio, and OpenAILike.
           </p> */}
         </div>

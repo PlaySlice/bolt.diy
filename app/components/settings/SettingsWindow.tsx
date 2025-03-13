@@ -29,26 +29,31 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
     { id: 'providers', label: 'Providers', icon: 'i-ph:key', component: <ProvidersTab /> },
     { id: 'connection', label: 'Connection', icon: 'i-ph:link', component: <ConnectionsTab /> },
     { id: 'features', label: 'Features', icon: 'i-ph:star', component: <FeaturesTab /> },
- /*    ...(debug
-      ? [
-          {
-            id: 'debug' as TabType,
-            label: 'Debug Tab',
-            icon: 'i-ph:bug',
-            component: <DebugTab />,
-          },
-        ]
-      : []), */
- /*    ...(eventLogs
-      ? [
-          {
-            id: 'event-logs' as TabType,
-            label: 'Event Logs',
-            icon: 'i-ph:list-bullets',
-            component: <EventLogsTab />,
-          },
-        ]
-      : []), */
+
+    /*
+     *    ...(debug
+     *    ? [
+     *       {
+     *         id: 'debug' as TabType,
+     *         label: 'Debug Tab',
+     *         icon: 'i-ph:bug',
+     *         component: <DebugTab />,
+     *       },
+     *     ]
+     *    : []),
+     */
+    /*
+     *    ...(eventLogs
+     *    ? [
+     *       {
+     *         id: 'event-logs' as TabType,
+     *         label: 'Event Logs',
+     *         icon: 'i-ph:list-bullets',
+     *         component: <EventLogsTab />,
+     *       },
+     *     ]
+     *    : []),
+     */
   ];
 
   return (
@@ -91,7 +96,7 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
                     {tab.label}
                   </button>
                 ))}
-{/*                 <div className="mt-auto flex flex-col gap-2">
+                {/*                 <div className="mt-auto flex flex-col gap-2">
                   <a
                     href="https://github.com/stackblitz-labs/bolt.diy"
                     target="_blank"

@@ -71,9 +71,8 @@ const getInitialProviderSettings = (): ProviderSetting => {
     initialSettings[provider.name] = {
       ...provider,
       settings: {
-           // Enable Ollama by default, keep other local providers disabled
-           enabled: provider.name === 'Ollama' || !LOCAL_PROVIDERS.includes(provider.name),
-
+        // Enable Ollama by default, keep other local providers disabled
+        enabled: provider.name === 'Ollama' || !LOCAL_PROVIDERS.includes(provider.name),
       },
     };
   });

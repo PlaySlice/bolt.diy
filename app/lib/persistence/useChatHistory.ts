@@ -357,6 +357,7 @@ ${value.content}
             content: message.content.replace(/boltArtifact/g, 'ez1Artifact').replace(/boltAction/g, 'ez1Action'),
           };
         }
+
         return message;
       });
 

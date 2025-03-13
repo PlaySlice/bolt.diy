@@ -20,20 +20,27 @@ import GithubProvider from './providers/github';
 export {
   GoogleProvider,
   AnthropicProvider,
-/*   CohereProvider, */
+
+  /*   CohereProvider, */
   DeepseekProvider,
- /* GroqProvider,
-   HuggingFaceProvider,
-  HyperbolicProvider, */
+
+  /*
+   * GroqProvider,
+   * HuggingFaceProvider,
+   * HyperbolicProvider,
+   */
   MistralProvider,
-  OllamaProvider, 
- OpenAIProvider,
+  OllamaProvider,
+  OpenAIProvider,
   OpenRouterProvider,
- /*  OpenAILikeProvider,
-  PerplexityProvider,
-  XAIProvider,
-  TogetherProvider,
-  LMStudioProvider,
-  AmazonBedrockProvider,
-  GithubProvider, */
+
+  /*
+   *  OpenAILikeProvider,
+   *  PerplexityProvider,
+   *  XAIProvider,
+   *  TogetherProvider,
+   *  LMStudioProvider,
+   *  AmazonBedrockProvider,
+   *  GithubProvider,
+   */
 };

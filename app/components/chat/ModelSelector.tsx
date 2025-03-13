@@ -47,6 +47,7 @@ export const ModelSelector = ({
         setIsModelDropdownOpen(false);
         setModelSearchQuery('');
       }
+
       if (providerDropdownRef.current && !providerDropdownRef.current.contains(event.target as Node)) {
         setIsProviderDropdownOpen(false);
         setProviderSearchQuery('');
@@ -54,6 +55,7 @@ export const ModelSelector = ({
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
@@ -85,6 +87,7 @@ export const ModelSelector = ({
     if (isModelDropdownOpen && searchInputRef.current) {
       searchInputRef.current.focus();
     }
+
     if (isProviderDropdownOpen && providerSearchInputRef.current) {
       providerSearchInputRef.current.focus();
     }
@@ -92,7 +95,9 @@ export const ModelSelector = ({
 
   // Handle keyboard navigation for models
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (!isModelDropdownOpen) return;
+    if (!isModelDropdownOpen) {
+      return;
+    }
 
     switch (e.key) {
       case 'ArrowDown':
@@ -105,11 +110,13 @@ export const ModelSelector = ({
         break;
       case 'Enter':
         e.preventDefault();
+
         if (focusedIndex >= 0 && focusedIndex < filteredModels.length) {
           setModel?.(filteredModels[focusedIndex].name);
           setIsModelDropdownOpen(false);
           setModelSearchQuery('');
         }
+
         break;
       case 'Escape':
         e.preventDefault();
@@ -121,7 +128,9 @@ export const ModelSelector = ({
 
   // Handle keyboard navigation for providers
   const handleProviderKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (!isProviderDropdownOpen) return;
+    if (!isProviderDropdownOpen) {
+      return;
+    }
 
     switch (e.key) {
       case 'ArrowDown':
@@ -134,16 +143,24 @@ export const ModelSelector = ({
         break;
       case 'Enter':
         e.preventDefault();
+
         if (focusedProviderIndex >= 0 && focusedProviderIndex < filteredProviders.length) {
           const selectedProvider = filteredProviders[focusedProviderIndex];
+
           if (enabledProviders.includes(selectedProvider.name)) {
             setProvider?.(selectedProvider);
+
             const firstModel = modelList.find((m) => m.provider === selectedProvider.name);
-            if (firstModel) setModel?.(firstModel.name);
+
+            if (firstModel) {
+              setModel?.(firstModel.name);
+            }
+
             setIsProviderDropdownOpen(false);
             setProviderSearchQuery('');
           }
         }
+
         break;
       case 'Escape':
         e.preventDefault();
@@ -158,6 +175,7 @@ export const ModelSelector = ({
     if (focusedIndex >= 0 && optionsRef.current[focusedIndex]) {
       optionsRef.current[focusedIndex]?.scrollIntoView({ block: 'nearest' });
     }
+
     if (focusedProviderIndex >= 0 && providerOptionsRef.current[focusedProviderIndex]) {
       providerOptionsRef.current[focusedProviderIndex]?.scrollIntoView({ block: 'nearest' });
     }
@@ -165,13 +183,16 @@ export const ModelSelector = ({
 
   // Update enabled providers when cookies change
   useEffect(() => {
-    if (providerList.length === 0) return;
+    if (providerList.length === 0) {
+      return;
+    }
 
     if (provider && !providerList.map((p) => p.name).includes(provider.name)) {
       const firstEnabledProvider = providerList[0];
       setProvider?.(firstEnabledProvider);
 
       const firstModel = modelList.find((m) => m.provider === firstEnabledProvider.name);
+
       if (firstModel) {
         setModel?.(firstModel.name);
       }
@@ -179,11 +200,15 @@ export const ModelSelector = ({
 
     // Check if current model is from an enabled provider
     const currentModel = modelList.find((m) => m.name === model);
+
     if (currentModel && !enabledProviders.includes(currentModel.provider)) {
       const firstEnabledProvider = providerList.find((p) => enabledProviders.includes(p.name));
+
       if (firstEnabledProvider) {
         setProvider?.(firstEnabledProvider);
+
         const firstModel = modelList.find((m) => m.provider === firstEnabledProvider.name);
+
         if (firstModel) {
           setModel?.(firstModel.name);
         }
@@ -304,10 +329,16 @@ export const ModelSelector = ({
                     )}
                     onClick={(e) => {
                       e.stopPropagation();
+
                       if (isEnabled) {
                         setProvider?.(providerOption);
+
                         const firstModel = modelList.find((m) => m.provider === providerOption.name);
-                        if (firstModel) setModel?.(firstModel.name);
+
+                        if (firstModel) {
+                          setModel?.(firstModel.name);
+                        }
+
                         setIsProviderDropdownOpen(false);
                         setProviderSearchQuery('');
                       }
