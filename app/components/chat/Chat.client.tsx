@@ -130,6 +130,7 @@ export const ChatImpl = memo(
     const files = useStore(workbenchStore.files);
     const actionAlert = useStore(workbenchStore.alert);
     const { activeProviders, promptId, autoSelectTemplate, contextOptimizationEnabled } = useSettings();
+    const [web3Mode, setWeb3Mode] = useState(false);
 
     const [model, setModel] = useState(() => {
       const savedModel = Cookies.get('selectedModel');
@@ -166,6 +167,7 @@ export const ChatImpl = memo(
         files,
         promptId,
         contextOptimization: contextOptimizationEnabled,
+        web3: web3Mode,
       },
       sendExtraMessageFields: true,
       onError: (e) => {
@@ -515,6 +517,7 @@ export const ChatImpl = memo(
             model,
             provider,
             apiKeys,
+            web3Mode,
           );
         }}
         uploadedFiles={uploadedFiles}
@@ -524,6 +527,8 @@ export const ChatImpl = memo(
         actionAlert={actionAlert}
         clearAlert={() => workbenchStore.clearAlert()}
         data={chatData}
+        web3Mode={web3Mode}
+        setWeb3Mode={setWeb3Mode}
       />
     );
   },

@@ -12,10 +12,11 @@ export async function action(args: ActionFunctionArgs) {
 const logger = createScopedLogger('api.enhancher');
 
 async function enhancerAction({ context, request }: ActionFunctionArgs) {
-  const { message, model, provider } = await request.json<{
+  const { message, model, provider, web3 } = await request.json<{
     message: string;
     model: string;
     provider: ProviderInfo;
+    web3?: boolean;
     apiKeys?: Record<string, string>;
   }>();
 
@@ -67,6 +68,29 @@ async function enhancerAction({ context, request }: ActionFunctionArgs) {
             - Maintain a helpful, constructive tone
             - Focus on what the user should provide
             - Use a standard template for consistency
+
+            ${
+              web3
+                ? `
+            Since this is a Web3 development prompt, focus on:
+            - For Solana program development:
+              - Specify use of Rust programming language
+              - Include Anchor framework requirements
+              - Define program instructions and accounts
+            - For frontend development:
+              - Use Astro framework for the frontend architecture
+              - Integrate @solana/web3.js for blockchain interactions
+              - Specify wallet connection requirements in Astro components
+              - Define transaction handling in Astro islands
+              - Structure client/server data flow
+            - General considerations:
+              - Security best practices
+              - Testing requirements
+              - Performance optimization needs
+              - SSR/SSG strategies with Astro
+            `
+                : ''
+            }
 
             IMPORTANT: Your response must ONLY contain the enhanced prompt text.
             Do not include any explanations, metadata, or wrapper tags.

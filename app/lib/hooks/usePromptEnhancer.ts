@@ -19,6 +19,7 @@ export function usePromptEnhancer() {
     model: string,
     provider: ProviderInfo,
     apiKeys?: Record<string, string>,
+    web3?: boolean,
   ) => {
     setEnhancingPrompt(true);
     setPromptEnhanced(false);
@@ -27,6 +28,7 @@ export function usePromptEnhancer() {
       message: input,
       model,
       provider,
+      web3,
     };
 
     if (apiKeys) {

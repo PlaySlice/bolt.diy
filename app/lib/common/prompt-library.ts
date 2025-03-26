@@ -5,6 +5,7 @@ export interface PromptOptions {
   cwd: string;
   allowedHtmlElements: string[];
   modificationTagName: string;
+  web3?: boolean;
 }
 
 export class PromptLibrary {
@@ -19,7 +20,7 @@ export class PromptLibrary {
     default: {
       label: 'Default Prompt',
       description: 'This is the battle tested default system Prompt',
-      get: (options) => getSystemPrompt(options.cwd),
+      get: (options) => getSystemPrompt(options.cwd, options.web3),
     },
     optimized: {
       label: 'Optimized Prompt (experimental)',

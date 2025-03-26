@@ -28,6 +28,7 @@ export async function streamText(props: {
   contextFiles?: FileMap;
   summary?: string;
   messageSliceId?: number;
+  web3?: boolean;
 }) {
   const {
     messages,
@@ -40,6 +41,7 @@ export async function streamText(props: {
     contextOptimization,
     contextFiles,
     summary,
+    web3,
   } = props;
   console.log('Props: ', props);
 
@@ -99,7 +101,8 @@ export async function streamText(props: {
       cwd: WORK_DIR,
       allowedHtmlElements: allowedHTMLElements,
       modificationTagName: MODIFICATIONS_TAG_NAME,
-    }) ?? getSystemPrompt();
+      web3,
+    }) ?? getSystemPrompt(WORK_DIR, web3);
 
   if (files && contextFiles && contextOptimization) {
     const codeContext = createFilesContext(contextFiles, true);

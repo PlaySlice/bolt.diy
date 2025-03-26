@@ -72,6 +72,8 @@ interface BaseChatProps {
   clearAlert?: () => void;
   data?: JSONValue[] | undefined;
   actionRunner?: ActionRunner;
+  web3Mode?: boolean;
+  setWeb3Mode?: (enabled: boolean) => void;
 }
 
 export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
@@ -108,6 +110,8 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       clearAlert,
       data,
       actionRunner,
+      web3Mode,
+      setWeb3Mode,
     },
     ref,
   ) => {
@@ -306,7 +310,6 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
         }
       }
     };
-
     const baseChat = (
       <div
         ref={ref}
@@ -333,16 +336,16 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               ref={scrollRef}
             >
               <ClientOnly>
-                {() => {
-                  return chatStarted ? (
+                {() =>
+                  chatStarted ? (
                     <Messages
                       ref={messageRef}
                       className="flex flex-col w-full flex-1 max-w-chat pb-6 mx-auto z-1"
                       messages={messages}
                       isStreaming={isStreaming}
                     />
-                  ) : null;
-                }}
+                  ) : null
+                }
               </ClientOnly>
               <div
                 className={classNames('flex flex-col gap-4 w-full max-w-chat mx-auto z-prompt mb-6', {
@@ -365,12 +368,6 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 <div
                   className={classNames(
                     'bg-bolt-elements-background-depth-2 p-3 rounded-lg border border-bolt-elements-borderColor relative w-full max-w-chat mx-auto z-prompt',
-
-                    /*
-                     * {
-                     *   'sticky bottom-2': chatStarted,
-                     * },
-                     */
                   )}
                 >
                   <svg className={classNames(styles.PromptEffectContainer)}>
@@ -593,6 +590,23 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                           <div className="i-ph:arrow-left text-lg" />
                           <span className="text-xs">Tiers</span>
                         </IconButton>
+                        <div className="flex items-center gap-2 ml-2 px-3 py-1.5 rounded-lg border border-bolt-elements-borderColor">
+                          <div className="i-ph:code text-lg text-bolt-elements-textPrimary" />
+                          <input
+                            type="checkbox"
+                            checked={web3Mode}
+                            onChange={(e) => setWeb3Mode?.(e.target.checked)}
+                            className="sr-only peer"
+                            id="web3-toggle"
+                          />
+                          <label
+                            htmlFor="web3-toggle"
+                            className="flex w-8 h-4 bg-gray-300 dark:bg-gray-600 cursor-pointer rounded-full peer-checked:bg-purple-500 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:border-gray-300 after:rounded-full after:h-3 after:w-3 after:shadow-md after:transition-all relative"
+                          ></label>
+                          <span className="text-xs font-medium text-bolt-elements-textPrimary">
+                            {web3Mode ? 'Web3' : 'Normal'}
+                          </span>
+                        </div>
                       </div>
                       {input.length > 3 ? (
                         <div className="text-xs text-bolt-elements-textTertiary">
